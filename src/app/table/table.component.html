@@ -1,4 +1,4 @@
-<div class="row ">
+<div class="row " #table3>
     <div class="col-md-12" id="excel-table">
         <p-table #dt [value]="products.data" dataKey="id" styleClass=" p-datatable-gridlines" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" 
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
@@ -14,8 +14,32 @@
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" #table (input)="dt.filterGlobal(table.value, 'contains')" placeholder="Search keyword" />
                 </span>  
-                <span class="offset-md-7 col-md-1">
+                <span class="offset-md-6 col-md-1">
                     <button class="btn  btn-sm btn-danger" (click)="createPdfFormat()">Create PDF</button>
+                </span>
+                <span class="col-md-1">
+                    <script>
+                        
+                        //document.getElementById("image_create").onclick()=function(){
+                        //     function image(){
+                        //         console.log("Amol");
+                        //     const screenshotTarget=document.getElementById("table3");
+                        //     html2canvas(screenshotTarget).then((canvas)=>{
+                        //         const base64image=canvas.toDataURL("image/png");
+                        //         console.log(base64image);
+                        //         const anchor=document.createElement("a");
+                        //         console.log(anchor);
+                        //         anchor.setAttribute("href",base64image);
+                        //         anchor.setAttribute("download","table_image.png");
+                        //         anchor.click();
+                        //         anchor.remove();
+                    
+                        //     });
+                        // }
+                    </script>
+                    <button class="btn  btn-sm btn-secondary" #image_create (click)="image()" >Create image</button>
+                    
+                   
                 </span>
                 <span class="col-md-1">
                     <button class="btn btn-sm btn-success" (click)="exportexcel()">Export to Excel</button>
