@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { ProductService } from '../shared/product.service';
 import { map } from 'rxjs/operators';
 import { Product } from '../product';
@@ -6,6 +6,9 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 //for  Excell..
 import * as XLSX from 'xlsx';
+//import html2canvas for image creation.
+import html2canvas from 'html2canvas';
+
 
 
 
@@ -23,6 +26,8 @@ export class TableComponent implements OnInit {
 	rows: any = new Array();
 	size: any;
 	//src='../../assets/image/nature.jpg';
+
+	@ViewChild('table3', {static: true}) 'table3': ElementRef  
 	constructor(private productService: ProductService) {
 	}
 
@@ -56,7 +61,17 @@ export class TableComponent implements OnInit {
 		//   }
 		// ];
 	}
-
+	
+	image(){
+		html2canvas(this.table3.nativeElement).then((canvas)=>{
+		const base64image=canvas.toDataURL("image/png");
+		const anchor=document.createElement("a");
+		anchor.setAttribute("href",base64image);
+		anchor.setAttribute("download","table_image.png");
+		anchor.click();
+		anchor.remove();
+	});
+}
 	async createPdfFormat() {
 		this.rows = [];
 	
@@ -163,4 +178,4 @@ export class TableComponent implements OnInit {
  
   }
 
-}
+ }
